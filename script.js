@@ -39,9 +39,11 @@ function updateSlide(index) {
   nextImage.onerror = () => image.classList.remove("changing");
   nextImage.src = flavor.image;
 }
+
 document.getElementById("next-btn").addEventListener("click", () => updateSlide(currentIndex + 1));
 document.getElementById("prev-btn").addEventListener("click", () => updateSlide(currentIndex - 1));
 chips.forEach(chip => chip.addEventListener("click", () => updateSlide(Number(chip.dataset.slide))));
+
 const menuToggle = document.getElementById("menu-toggle");
 const nav = document.querySelector(".main-nav");
 menuToggle.addEventListener("click", () => {
@@ -58,8 +60,7 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowLeft") updateSlide(currentIndex - 1);
 });
 
-
-// Pin the hero and tie bowl rotation + flavor changes to scroll progress.
+// Scrolling through the pinned hero automatically advances the same flavors as the arrows.
 const heroTrack = document.getElementById("hero-scroll-track");
 const stickyHero = heroTrack?.querySelector(".hero");
 let scrollFramePending = false;
@@ -72,12 +73,11 @@ function syncFlavorToScroll() {
   const trackHeight = heroTrack.offsetHeight;
   const heroHeight = stickyHero.getBoundingClientRect().height;
   const travel = Math.max(1, trackHeight - heroHeight);
-  const progress = Math.max(0, Math.min(0.99999, (window.scrollY - trackTop) / travel));
+  const progress = Math.max(0, Math.min(1, (window.scrollY - trackTop) / travel));
 
-  // Four full rotations across the four flavor chapters.
+  // Keep rotation continuous while flavor/theme changes happen at four clear scroll chapters.
   image.style.setProperty("--scroll-rotation", (-7 + progress * 1440) + "deg");
-
-  const scrollIndex = Math.min(flavors.length - 1, Math.floor(progress * flavors.length));
+  const scrollIndex = Math.min(flavors.length - 1, Math.round(progress * (flavors.length - 1)));
   if (scrollIndex !== currentIndex) updateSlide(scrollIndex);
 }
 
