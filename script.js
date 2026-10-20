@@ -59,23 +59,32 @@ document.addEventListener("keydown", event => {
 });
 
 
-// Scroll through the pinned hero to reveal each flavor and its color palette.
+// Drive the full site theme and featured flavor from scroll progress.
 const heroTrack = document.getElementById("hero-scroll-track");
 const stickyHero = heroTrack?.querySelector(".hero");
 let scrollFramePending = false;
+
 function syncFlavorToScroll() {
   scrollFramePending = false;
-  if (!heroTrack || !stickyHero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!heroTrack) return;
+
   const trackTop = heroTrack.getBoundingClientRect().top + window.scrollY;
-  const travel = Math.max(1, heroTrack.offsetHeight - stickyHero.offsetHeight);
+  const trackHeight = heroTrack.offsetHeight;
+  const viewportHeight = window.innerHeight;
+  const travel = Math.max(1, trackHeight - viewportHeight);
   const progress = Math.max(0, Math.min(0.9999, (window.scrollY - trackTop) / travel));
   const scrollIndex = Math.min(flavors.length - 1, Math.floor(progress * flavors.length));
+
   if (scrollIndex !== currentIndex) updateSlide(scrollIndex);
 }
-window.addEventListener("scroll", () => {
-  if (!scrollFramePending) {
-    scrollFramePending = true;
-    window.requestAnimationFrame(syncFlavorToScroll);
-  }
-}, { passive: true });
-window.addEventListener("resize", syncFlavorToScroll);
+
+function requestScrollThemeUpdate() {
+  if (scrollFramePending) return;
+  scrollFramePending = true;
+  window.requestAnimationFrame(syncFlavorToScroll);
+}
+
+window.addEventListener("scroll", requestScrollThemeUpdate, { passive: true });
+window.addEventListener("resize", requestScrollThemeUpdate);
+window.addEventListener("load", requestScrollThemeUpdate);
+requestScrollThemeUpdate();
