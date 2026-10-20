@@ -9,3 +9,6 @@
 @media(max-width:900px){.hero-scroll-track>.hero{min-height:530px}.scroll-hint{bottom:12px;font-size:7px}}
 @media(max-width:600px){.hero-scroll-track>.hero{height:auto;min-height:100svh;padding:39px 0 72px;overflow:visible}.scroll-hint{bottom:18px}.hero-art{height:320px}}
 @media(prefers-reduced-motion:reduce){.scroll-hint span{animation:none}}
+
+/* clip prevents page-shell from trapping the sticky hero */
+.page-shell{overflow:clip}
