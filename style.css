@@ -39,3 +39,48 @@
 .hero-copy,.hero-art,.flavor-strip,.about-strip,footer{
   transition:background-color .55s ease,color .45s ease;
 }
+
+
+/* FINAL scroll choreography: pin the hero while each bowl gets its own scroll chapter. */
+.hero-scroll-track{
+  height:400vh !important;
+  position:relative;
+}
+.hero-scroll-track>.hero{
+  position:sticky !important;
+  top:0;
+  height:100vh;
+  min-height:600px;
+  overflow:hidden;
+}
+.bowl-image{
+  transform:rotate(var(--scroll-rotation,-7deg)) scale(1);
+  transition:opacity .38s ease, transform .12s linear;
+  will-change:transform,opacity;
+}
+.bowl-image.changing{
+  opacity:0;
+  transform:rotate(calc(var(--scroll-rotation,-7deg) + 95deg)) scale(.82);
+}
+.hero-copy,.hero-art{
+  will-change:opacity,transform;
+}
+@media(max-width:900px){
+  .hero-scroll-track>.hero{min-height:560px}
+}
+@media(max-width:600px){
+  .hero-scroll-track{height:400vh !important}
+  .hero-scroll-track>.hero{
+    position:sticky !important;
+    top:0;
+    height:100svh;
+    min-height:720px;
+    padding:25px 0 54px;
+    overflow:hidden;
+    justify-content:center;
+  }
+  .hero-art{height:300px;margin-top:4px}
+  .hero-copy{flex-shrink:0}
+  .slide-meta{margin-top:18px}
+  .scroll-hint{bottom:10px}
+}
