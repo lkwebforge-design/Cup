@@ -57,3 +57,25 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowRight") updateSlide(currentIndex + 1);
   if (event.key === "ArrowLeft") updateSlide(currentIndex - 1);
 });
+
+
+// Scroll through the pinned hero to reveal each flavor and its color palette.
+const heroTrack = document.getElementById("hero-scroll-track");
+const stickyHero = heroTrack?.querySelector(".hero");
+let scrollFramePending = false;
+function syncFlavorToScroll() {
+  scrollFramePending = false;
+  if (!heroTrack || !stickyHero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const trackTop = heroTrack.getBoundingClientRect().top + window.scrollY;
+  const travel = Math.max(1, heroTrack.offsetHeight - stickyHero.offsetHeight);
+  const progress = Math.max(0, Math.min(0.9999, (window.scrollY - trackTop) / travel));
+  const scrollIndex = Math.min(flavors.length - 1, Math.floor(progress * flavors.length));
+  if (scrollIndex !== currentIndex) updateSlide(scrollIndex);
+}
+window.addEventListener("scroll", () => {
+  if (!scrollFramePending) {
+    scrollFramePending = true;
+    window.requestAnimationFrame(syncFlavorToScroll);
+  }
+}, { passive: true });
+window.addEventListener("resize", syncFlavorToScroll);
