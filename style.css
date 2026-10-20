@@ -19,3 +19,23 @@
 .hero-scroll-track>.hero{position:relative;top:auto;height:auto;min-height:590px;overflow:visible}
 @media(max-width:900px){.hero-scroll-track>.hero{min-height:530px}}
 @media(max-width:600px){.hero-scroll-track>.hero{height:auto;min-height:100svh;padding:39px 0 72px;overflow:visible}}
+
+
+/* Scroll choreography: continuous bowl rotation + soft flavor transitions */
+.bowl-image{
+  transform:rotate(var(--scroll-rotation, -7deg));
+  will-change:transform,opacity;
+  transition:opacity .42s ease,transform .18s linear;
+}
+.bowl-image.changing{
+  opacity:.12;
+  transform:rotate(calc(var(--scroll-rotation, 0deg) + 80deg)) scale(.88);
+}
+.sun-disc,.bowl-halo,.floating-sticker,.primary-cta,.header-cta,.flavor-chip,.control-btn{
+  transition-property:background-color,border-color,color,box-shadow,transform,opacity;
+  transition-duration:.55s;
+  transition-timing-function:ease;
+}
+.hero-copy,.hero-art,.flavor-strip,.about-strip,footer{
+  transition:background-color .55s ease,color .45s ease;
+}
