@@ -59,15 +59,23 @@ document.addEventListener("keydown", event => {
 });
 
 
-// Drive the full site's palette from actual document scroll progress.
+// Scroll controls the bowl's continuous spin and each flavor/theme transition.
 let scrollFramePending = false;
+let lastScrollIndex = -1;
 
 function syncFlavorToScroll() {
   scrollFramePending = false;
   const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   const progress = Math.max(0, Math.min(0.9999, window.scrollY / maxScroll));
+
+  // One full bowl rotation per flavor chapter, smoothly tied to scroll position.
+  image.style.setProperty("--scroll-rotation", `${(progress * flavors.length * 360) - 7}deg`);
+
   const scrollIndex = Math.min(flavors.length - 1, Math.floor(progress * flavors.length));
-  if (scrollIndex !== currentIndex) updateSlide(scrollIndex);
+  if (scrollIndex !== lastScrollIndex) {
+    lastScrollIndex = scrollIndex;
+    if (scrollIndex !== currentIndex) updateSlide(scrollIndex);
+  }
 }
 
 function requestScrollThemeUpdate() {
