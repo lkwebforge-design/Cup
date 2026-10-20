@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8b1e24">
+  <meta name="description" content="Meet Pluffy — colorful smoothie bowls made for your brighter days.">
+  <title>PLUFFY — Smoothie Bowls</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-shell" id="page-shell">
+    <header class="site-header">
+      <a class="wordmark" href="#" aria-label="Pluffy home">pluffy<span>®</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#home">Home</a>
+        <a class="nav-link" href="#flavors">Our bowls</a>
+        <a class="nav-link" href="#about">Our story</a>
+      </nav>
+      <a class="header-cta" href="#flavors">Find your flavor <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </header>
+
+    <main id="home">
+      <section class="hero" aria-label="Featured smoothie bowl">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> A little bowl of happy</p>
+          <h1 id="flavor-title">PINK<br><span>BERRY.</span></h1>
+          <p class="hero-description" id="flavor-description">Raspberry, açaí and plant-powered goodness. Your feel-good moment, served by the spoonful.</p>
+          <div class="hero-actions">
+            <a class="primary-cta" id="order-link" href="#flavors">Discover the bowl <span aria-hidden="true">↗</span></a>
+            <div class="price-block"><span class="price-label">FROM</span><strong id="flavor-price">$20</strong></div>
+          </div>
+          <div class="slide-meta"><span id="slide-count">01</span><span class="meta-line"></span><span>THE FEEL-GOOD MENU</span></div>
+        </div>
+        <div class="hero-art" aria-label="Smoothie bowl photography">
+          <div class="sun-disc"></div>
+          <div class="art-caption caption-top">fresh things<br>happen here <span>✳</span></div>
+          <div class="bowl-halo"></div>
+          <img id="bowl-image" class="bowl-image" src="https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=1000&q=85" alt="Pink berry smoothie bowl topped with fresh fruit">
+          <div class="floating-sticker"><span>100%</span><small>GOOD<br>MOOD</small></div>
+          <div class="art-caption caption-bottom">made with<br>the good stuff.</div>
+          <div class="image-counter"><span id="current-flavor">01</span><span class="counter-divider">/</span><span>04</span></div>
+        </div>
+        <div class="slider-controls">
+          <button class="control-btn" id="prev-btn" aria-label="Previous flavor">←</button>
+          <button class="control-btn next" id="next-btn" aria-label="Next flavor">→</button>
+        </div>
+        <div class="vertical-note">BLENDED FRESH · FEEL GOOD</div>
+      </section>
+
+      <section class="flavor-strip" id="flavors">
+        <div><span class="strip-kicker">MEET YOUR MATCH</span><h2>Goodness comes<br>in <em>all flavors.</em></h2></div>
+        <button class="flavor-chip selected" data-slide="0"><span class="chip-swatch berry"></span> Pink Berry <span>↗</span></button>
+        <button class="flavor-chip" data-slide="1"><span class="chip-swatch peach"></span> Peach Garden <span>↗</span></button>
+        <button class="flavor-chip" data-slide="2"><span class="chip-swatch blue"></span> Blue Mood <span>↗</span></button>
+        <button class="flavor-chip" data-slide="3"><span class="chip-swatch strawberry"></span> Strawberry Kiss <span>↗</span></button>
+      </section>
+      <section class="about-strip" id="about"><span class="about-star">✳</span><p>Real fruit. Feel-good ingredients. <strong>Zero boring bites.</strong></p><span class="about-tag">BLENDED WITH LOVE</span></section>
+    </main>
+    <footer><a class="footer-logo" href="#home">pluffy<span>®</span></a><span>MAKE ROOM FOR A LITTLE HAPPY.</span><a href="#home">BACK TO TOP ↑</a></footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
