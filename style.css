@@ -12,3 +12,10 @@
 
 /* clip prevents page-shell from trapping the sticky hero */
 .page-shell{overflow:clip}
+
+
+/* Scroll themes across the actual page, not a 500vh pinned hero */
+.hero-scroll-track{height:auto}
+.hero-scroll-track>.hero{position:relative;top:auto;height:auto;min-height:590px;overflow:visible}
+@media(max-width:900px){.hero-scroll-track>.hero{min-height:530px}}
+@media(max-width:600px){.hero-scroll-track>.hero{height:auto;min-height:100svh;padding:39px 0 72px;overflow:visible}}
