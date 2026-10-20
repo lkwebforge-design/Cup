@@ -59,17 +59,23 @@ document.addEventListener("keydown", event => {
 });
 
 
-// Scroll controls the bowl's continuous spin and each flavor/theme transition.
+// Pin the hero and map its scroll progress to a smooth bowl spin + flavor changes.
+const heroTrack = document.getElementById("hero-scroll-track");
+const stickyHero = heroTrack?.querySelector(".hero");
 let scrollFramePending = false;
 let lastScrollIndex = -1;
 
 function syncFlavorToScroll() {
   scrollFramePending = false;
-  const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-  const progress = Math.max(0, Math.min(0.9999, window.scrollY / maxScroll));
+  if (!heroTrack || !stickyHero) return;
 
-  // One full bowl rotation per flavor chapter, smoothly tied to scroll position.
-  image.style.setProperty("--scroll-rotation", `${(progress * flavors.length * 360) - 7}deg`);
+  const trackTop = heroTrack.getBoundingClientRect().top + window.scrollY;
+  const travel = Math.max(1, heroTrack.offsetHeight - stickyHero.offsetHeight);
+  const progress = Math.max(0, Math.min(0.99999, (window.scrollY - trackTop) / travel));
+
+  // Rotate continuously with the scroll, then softly swap the bowl at each chapter.
+  const rotation = -7 + progress * 1440;
+  image.style.setProperty("--scroll-rotation", rotation + "deg");
 
   const scrollIndex = Math.min(flavors.length - 1, Math.floor(progress * flavors.length));
   if (scrollIndex !== lastScrollIndex) {
