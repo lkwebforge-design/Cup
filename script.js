@@ -59,22 +59,14 @@ document.addEventListener("keydown", event => {
 });
 
 
-// Drive the full site theme and featured flavor from scroll progress.
-const heroTrack = document.getElementById("hero-scroll-track");
-const stickyHero = heroTrack?.querySelector(".hero");
+// Drive the full site's palette from actual document scroll progress.
 let scrollFramePending = false;
 
 function syncFlavorToScroll() {
   scrollFramePending = false;
-  if (!heroTrack) return;
-
-  const trackTop = heroTrack.getBoundingClientRect().top + window.scrollY;
-  const trackHeight = heroTrack.offsetHeight;
-  const viewportHeight = window.innerHeight;
-  const travel = Math.max(1, trackHeight - viewportHeight);
-  const progress = Math.max(0, Math.min(0.9999, (window.scrollY - trackTop) / travel));
+  const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const progress = Math.max(0, Math.min(0.9999, window.scrollY / maxScroll));
   const scrollIndex = Math.min(flavors.length - 1, Math.floor(progress * flavors.length));
-
   if (scrollIndex !== currentIndex) updateSlide(scrollIndex);
 }
 
